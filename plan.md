@@ -4,6 +4,7 @@
 * Do you test your tests ? (yo dawg picture)
 * Do you test the test for your tests (just kidding) (yo dawg picture surprised)
 * There is a technique proposed first in 1970 by Richard Lipton (a picture of Lipton, no, the other Lipton) that is called mutation testing
+
 * So, how does it work ? You start by changing your program in a small ways.
 * How small changes are we talking about ? Well, very small:
     + Changing the operator or a value in a mathematical equation (changing + with -)

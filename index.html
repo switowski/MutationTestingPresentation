@@ -1,81 +1,268 @@
 <!doctype html>
 <html lang="en">
 
-	<head>
-		<meta charset="utf-8">
+    <head>
+        <meta charset="utf-8">
 
-		<title>Mutation Testing</title>
+        <title>Mutation Testing</title>
 
-		<meta name="description" content="Presentation about Mutation Testing">
-		<meta name="author" content="Sebastian Witowski">
+        <meta name="description" content="Presentation about Mutation Testing">
+        <meta name="author" content="Sebastian Witowski">
 
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/black.css" id="theme">
 
-		<!-- Code syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+        <!-- Code syntax highlighting -->
+        <link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
 
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
-	</head>
+        <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+    </head>
 
-	<body>
+    <body>
 
-		<div class="reveal">
-			<div class="slides">
-				<section data-markdown>
-					<script type="text/template">
-						<h1>Mutation Testing</h1>
-						<p>
-							<small>Created for 1st Developers@CERN Forum</small>
-						</p>
-					</script>
-				</section>
-			</div>
-		</div>
+        <div class="reveal">
+            <div class="slides">
+                <section>
+                    <h2>Mutation Testing</h2>
+                    <h5>or who is going to test your tests ?</h5>
+                    <img src="./img/mutants.png">
+                    <p style="margin-top: -25px; font-size: 12px;">[source: <a href="http://vignette3.wikia.nocookie.net/fallout/images/3/3c/FO3_super_mutants_line-up.png/revision/latest?cb=20120404013228">http://vignette3.wikia.nocookie.net/fallout/images/3/3c/FO3_super_mutants_line-up.png/revision/latest?cb=20120404013228</a></p>
+                    <p>
+                        <small>Created for 1st Developers@CERN Forum</small>
+                    </p>
+                    <aside class="notes">
+                        Hey guys, I hope you had a great time today, there were so many cool talks and I guess you are all hungry and would like to go for lunch, so I promise I won't keep you long here.
+                    </aside>
+                </section>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
 
-		<script>
 
-			// Full list of configuration options available at:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
+                <section>
+                    <p>
+                        Do you write code ?
+                    </p>
+                    <aside class="notes">
+                        Let's start with a few questions for a warm up.
+                        Please raise your hand if you are writing code.
+                        Cool, everyone. Well, I didn't expect anything else since the forum is called "Developers@CERN"
+                    </aside>
+                </section>
 
-				transition: 'slide', // none/fade/slide/convex/concave/zoom
+                <section>
+                    <p>
+                        Do you test your code ?
+                    </p>
+                    <aside class="notes">
+                        Now, keep your hand up if you write tests for your code.
+                    </aside>
+                </section>
 
-				// Optional reveal.js plugins
-				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true },
-					{ src: 'plugin/notes/notes.js', async: true }
-				]
-			});
+                <section>
+                    <p>
+                        Do you test your tests ?
+                    </p>
+                    <img src="./img/yo_dawg_test.jpg">
+                    <aside class="notes">
+                        And do you test your tests ?
+                    </aside>
+                </section>
 
-		</script>
+                <section>
+                    <p>
+                        Do you test the tests for your tests ?
+                    </p>
+                    <img src="./img/yo_dawg_surprised.jpg">
+                    <aside class="notes">
+                        And do you test the tests that you wrote for your tests ?<br/>
+                        No, I'm just kidding.<br/>
+                        Let's just stick to testing your tests here.
+                    </aside>
+                </section>
 
-	</body>
+                <section>
+                    <img src="./img/nobody_has_time.jpg" />
+                    <aside class="notes">
+                        "Testing your tests" might sound crazy.<br/>
+                        After all, we just saw that not everybody has time to test their code in the first place.<br/>
+                    </aside>
+                </section>
+
+
+
+                <section>
+                    <img src="./img/r_lipton.jpg" />
+                    <p>
+                        Richard Lipton, <em>Fault Diagnosis of Computer Programs</em>, 1971
+                    </p>
+                    <aside class="notes">
+                        But what if there was an automatic tool for testing you tests ?<br/>
+                        Well, that's a different story.
+                        The same thought had Robert Lipton, when he first came up with the idea of mutation testing in 1971.
+                    </aside>
+                </section>
+
+                <section>
+                    <p>
+                        How does it work ?
+                    </p>
+                    <aside class="notes">
+                        Ok, so how does it work ?
+                    </aside>
+                </section>
+
+                <section>
+                    <section>
+                        <p>Step 1. Change you code in a small way:
+    <pre><code class="python">a + b</code></pre>
+        <span style="font-size: 72px;">&#8595;</span>
+    <pre><code class="python">a * b</code></pre>
+                        </p>
+                        <aside class="notes">
+                            You start by changing your code in a small way.<br/>
+                            How small changes are we talking about ?<br>
+                            Well, very small, you can:<br/>
+                            change the operator or a value in a mathematical equation
+                            duplicate a statement
+                            replace one variable with other
+                            etc.
+                        </aside>
+                    </section>
+                    <section>
+                        <p>Step 1. Change you code in a small way:
+    <pre><code class="python">def add(a, b):
+        return a + b</code></pre>
+        <span style="font-size: 72px;">&#8595;</span>
+    <pre><code class="python">def add(a, b):
+        return a + b
+        return a + b</code></pre>
+                        </p>
+                        <aside class="notes">
+                            You start by changing your code in a small way.<br/>
+                            How small changes are we talking about ?<br>
+                            Well, very small, you can:<br/>
+                            change the operator or a value in a mathematical equation
+                            duplicate a statement
+                            replace one variable with other
+                            etc.
+                        </aside>
+                    </section>
+                </section>
+
+                <section>
+                    <p>Step 1. Change you code in a small way:
+<pre><code class="python">def add(a, b):
+    return a + b</code></pre>
+    <span style="font-size: 72px;">&#8595;</span>
+<pre><code class="python">def add(a, b):
+    return a * b</code></pre>
+                    </p>
+                    <aside class="notes">
+                        You start by changing your code in a small way.<br/>
+                        How small changes are we talking about ?<br>
+                        Well, very small, you can:<br/>
+                        change the operator or a value in a mathematical equation
+                        duplicate a statement
+                        replace one variable with other
+                        etc.
+                    </aside>
+                </section>
+
+
+
+
+                <section>
+                    <p>
+                    </p>
+                    <aside class="notes">
+                    </aside>
+                </section>
+
+
+
+
+                <section>
+                    <p>
+                        Do you write tests ?
+                    </p>
+                    <aside class="notes">
+                        Now, keep your hand up if you write tests for your code.
+                    </aside>
+                </section>
+
+
+
+
+                <section>
+                    <p>
+                        Do you write tests ?
+                    </p>
+                    <aside>
+                        Now, keep your hand up if you write tests for your code.
+                    </aside>
+                </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+
+        <script src="lib/js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+
+            // Full list of configuration options available at:
+            // https://github.com/hakimel/reveal.js#configuration
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                history: true,
+                center: true,
+
+                transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+                // Optional reveal.js plugins
+                dependencies: [
+                    { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+                    { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+                    { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+                    { src: 'plugin/zoom-js/zoom.js', async: true },
+                    { src: 'plugin/notes/notes.js', async: true }
+                ]
+            });
+
+        </script>
+
+    </body>
 </html>
