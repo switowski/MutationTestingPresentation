@@ -138,6 +138,8 @@ body {
   font-family: monospace; }
 
 .reveal pre code {
+  font-size: larger;
+  line-height: 33px;
   display: block;
   padding: 5px;
   overflow: auto;
@@ -145,6 +147,14 @@ body {
   word-wrap: normal;
   background: #3F3F3F;
   color: #DCDCDC; }
+
+.reveal .good {
+  color: lime;
+}
+
+.reveal .bad {
+  color: red;
+}
 
 .reveal table {
   margin: auto;
