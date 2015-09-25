@@ -120,18 +120,19 @@
 
                 <section>
                     <section>
-                        <h2>How does it work ?</h2>
+                        <h1>How does it work ?</h1>
                         <aside class="notes">Ok, so how does it work ?</aside>
                     </section>
                     <section>
-                        <p>Step 1. Change you code in a small way:
-                        <ul>
-                            <li>a <span class="bad">+</span> b ---> a <span class="good">*</span> b</li>
-                            <li>a + <span class="bad">1</span> ---> a + <span class="good">2</span></li>
-                            <li>a + <span class="bad">b</span> ---> a + <span class="good">c</span></li>
-                            <li><span class="bad">a + 1</span> ---> <span class="good">a + 1<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a + 1</span></li>
-                            <li>(if a == 1 <span class="bad">and</span> b > 1) ---> (if a == 1 <span class="good">or</span> b > 1)</li>
-                        </ul>
+                        <h2>Step 1. Change you code in a small way:</h2>
+                        <p>
+                            <ul>
+                                <li>a <span class="bad">+</span> b ---> a <span class="good">*</span> b</li>
+                                <li>a + <span class="bad">1</span> ---> a + <span class="good">2</span></li>
+                                <li>a + <span class="bad">b</span> ---> a + <span class="good">c</span></li>
+                                <li><span class="bad">a + 1</span> ---> <span class="good">a + 1<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a + 1</span></li>
+                                <li>(if a == 1 <span class="bad">and</span> b > 1) ---> (if a == 1 <span class="good">or</span> b > 1)</li>
+                            </ul>
                         </p>
                         <aside class="notes">
                             You start by changing your code in a small way.<br/>
@@ -146,19 +147,166 @@
                         </aside>
                     </section>
                     <section>
+                        <h2>Step 2. Run your tests</h2>
                         <p>
-                            Step 2. Run you tests and see what happens
                             <img src="./img/mutation_schema_big.png">
                         </p>
                         <aside class="notes">
                             After that, you run your tests and see what happens. There are two possibilities here.<br/>
                             You start getting errors, which means that tests have reached the modified code and:<br/>
                             - either they died with some error message, because they didn't expect this modification in the code - this means that your tests are good and in case something changes, you will notice it (this is called weak mutation testing)<br/>
-                            - or the tests detected the change properly and gave you the assertion error - which means that your tests are even better (this is called strong mutation testing and it's more powerful - it means that tests are actually catching the possible problems, but it's more difficult to achieve).
+                            - or the tests detected the change properly and gave you the assertion error - which means that your tests are even better (this is called strong mutation testing and it's more powerful - it means that tests are actually catching the possible problems, but it's more difficult to achieve this).
+                            Or, your tests are still working which is bad because it can mean one of two things:<br/>
+                            - the code that was changed was never executed (so you have dead code, which is even worse than bad tests)
+                            - your tests can't detect the problems that were introduced during the mutation (so your tests are bad)
+                        </aside>
+                    </section>
+                    <section>
+                        <h2>Step 3. Get the mutation score</h2>
+                        <p>
+                            <span>Mutation score = </span>
+                            <span class="good" style="border-bottom: solid #fff; padding: 4px 10px;">number or mutants killed</span><br />
+                            <span class="bad" style="padding: 4px 10px 0 280px;">number of mutants created</span>
+                        </p>
+                        <aside class="notes">
+                            After all the possible mutations have been tested, you will get the mutation score, which is equal the number of mutants killed divided by the total number of mutants created.<br />
+                            So here, instead of having 100% of test coverage (as for normal tests), we aim to have 100% of mutants killed.
+                        </aside>
+                    </section>
+
+                    <section>
+                        <h2>Step 4. Profit</h2>
+                        <aside class="notes">
+                            And that's it, it's that simple ! Now you know what tests you need to fix.
                         </aside>
                     </section>
                 </section>
 
+                <section>
+                    <section>
+                        <h1>Example time</h1>
+                        <aside class="notes">
+                            And that's it, it's that simple ! Now you know what tests you need to fix.
+                        </aside>
+                    </section>
+                    <section>
+                        <p>
+                            <pre><code>def multiply(a, b):
+    return a * b</code></pre>
+                        </p>
+                        <aside class="notes">
+                        Let's write a simple function that could be used in a calculator software.
+                        </aside>
+                    </section>
+                    <section>
+                        <p>
+                            <pre><code>class CalculatorTest(TestCase):
+    def test_multiply(self):
+        self.assertEqual(multiply(2, 2), 4)</code></pre>
+                        </p>
+                        <aside class="notes">
+                            And then write the simplest possible test for that.<br />
+                            Now, who can tell me, what is wrong with this test ?<br />
+                            Right, you can replace the multiplication operator with the addition operator (or even with the power operator) and this test will still pass.<br/>If you run a mutation testing tool, it will try to replace multiplication operators with various other operators or statements.<br/>
+                            If the tool is good, it should detect the mutant that survived and inform you about that.
+                        </aside>
+                    </section>
+                    <section>
+                        <p>
+                            <pre><code>self.assertEqual(multiply(2, 2), 4)</code></pre>
+                            <span style="font-size: 72px;">&darr;</span>
+                            <pre><code>self.assertEqual(multiply(3, 3), 9)</code></pre>
+                        </p>
+                        <aside class="notes">
+                            So now we know that we need to improve our test.<br />
+                            And this is how mutation testing can help you improve your tests.
+                        </aside>
+                    </section>
+                </section>
+
+                <section>
+                    <img src="./img/why_are_we_not_funding_this.jpg">
+                    <aside class="notes">
+                        So where is the catch ?<br/>
+                        Well, I'm glad you have asked !<br/>
+                    </aside>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Equal Mutant Problem</h2>
+                        <aside class="notes">
+                            One of the main problems with mutation testing is called "Equivalent Mutant Problem" - it means that some operations can create a mutant that you won't be able to detect with any tests.
+                        </aside>
+                    </section>
+                    <section>
+                        <p>
+                            <pre><code>index = 0
+while True:
+    do_stuff()
+    index = index + 1
+    if index == 10:
+        break</code></pre>
+                        </p>
+                        <p>if index <span class="bad">==</span> 10:<br/>
+                        vs.<br/>
+                        if index <span class="good">>=</span> 10:
+                        </p>
+                        <aside class="notes">
+                            Let me show you an example. Take a look at this simple loop that does some stuff and then increments the index.<br />
+                            When we reach 10, we want to break.<br />
+                            We can easily tell that in this case there is absolutely no difference if we use the equal operator or the greater or equal operator.<br />
+                            However, for automatic mutation testing, those two cases are different and we will get a false positive (mutation testing thinks that changing the comparison operator creates a mutant that has not been killed, so it assumes your tests are not strong enough).
+                        </aside>
+                    </section>
+                </section>
+
+                <section>
+                    <h2>Wrap up</h2>
+                    <img src="./img/wrap_up.jpg" />
+                    <aside class="notes">
+                        So let's wrap up
+                    </aside>
+                </section>
+
+                <section>
+                    <h2>The good parts</h2>
+                    <ul>
+                        <li>Detect problems with your tests</li>
+                        <li>They discover dead code</li>
+                        <li>They are (usually) automated</li>
+                        <li>How else would you test your tests ?</li>
+                    </ul>
+                    <aside class="notes">
+                    </aside>
+                </section>
+
+                <section>
+                    <h2>The not so good parts</h2>
+                    <ul>
+                        <li>Mutation testing is slow</li>
+                        <li>Not so many libraries</li>
+                        <li>Equivalent Mutant Problem</li>
+                        <li>Writing complex mutant tests is difficult</li>
+                    </ul>
+                    <aside class="notes">
+                    </aside>
+                </section>
+
+                <section>
+                    <h1>Mutant testing libraries</h1>
+                    <aside class="notes">
+                    </aside>
+                </section>
+
+                <section>
+                    <h2>Thank you !</h2>
+                    <h1>You guys are the best audience ever !</h1>
+                    <h2>Any questions ?</h2>
+                    <aside class="notes">
+                    </aside>
+                </section>
+
 
 
 
@@ -170,45 +318,6 @@
                     </aside>
                 </section>
 
-
-
-
-                <section>
-                    <p>
-                    </p>
-                    <aside class="notes">
-                    </aside>
-                </section>
-
-
-
-
-                <section>
-                    <p>
-                    </p>
-                    <aside class="notes">
-                    </aside>
-                </section>
-
-
-
-
-                <section>
-                    <p>
-                    </p>
-                    <aside class="notes">
-                    </aside>
-                </section>
-
-
-
-
-                <section>
-                    <p>
-                    </p>
-                    <aside class="notes">
-                    </aside>
-                </section>
 
 
 
