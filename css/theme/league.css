@@ -147,6 +147,14 @@ body {
   background: #3F3F3F;
   color: #DCDCDC; }
 
+.reveal .good {
+  color: lime;
+}
+
+.reveal .bad {
+  color: red;
+}
+
 .reveal table {
   margin: auto;
   border-collapse: collapse;

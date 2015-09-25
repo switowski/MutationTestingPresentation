@@ -15,7 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
         <link rel="stylesheet" href="css/reveal.css">
-        <link rel="stylesheet" href="css/theme/black.css" id="theme">
+        <link rel="stylesheet" href="css/theme/league.css" id="theme">
 
         <!-- Code syntax highlighting -->
         <link rel="stylesheet" href="lib/css/zenburn.css">
@@ -41,10 +41,11 @@
                 <section>
                     <h2>Mutation Testing</h2>
                     <h5>or who is going to test your tests ?</h5>
-                    <img src="./img/mutants.png">
-                    <p style="margin-top: -25px; font-size: 12px;">[source: <a href="http://vignette3.wikia.nocookie.net/fallout/images/3/3c/FO3_super_mutants_line-up.png/revision/latest?cb=20120404013228">http://vignette3.wikia.nocookie.net/fallout/images/3/3c/FO3_super_mutants_line-up.png/revision/latest?cb=20120404013228</a></p>
+                    <p style="font-family: League Gothic;"><br/><br/><br/>
+                        1st Developers@CERN Forum
+                    </p>
                     <p>
-                        <small>Created for 1st Developers@CERN Forum</small>
+                        <small>Created by <a href="https://github.com/switowski">Sebastian Witowski</a></small>
                     </p>
                     <aside class="notes">
                         Hey guys, I hope you had a great time today, there were so many cool talks and I guess you are all hungry and would like to go for lunch, so I promise I won't keep you long here.
@@ -54,9 +55,9 @@
 
 
                 <section>
-                    <p>
+                    <h2>
                         Do you write code ?
-                    </p>
+                    </h2>
                     <aside class="notes">
                         Let's start with a few questions for a warm up.
                         Please raise your hand if you are writing code.
@@ -65,18 +66,18 @@
                 </section>
 
                 <section>
-                    <p>
+                    <h2>
                         Do you test your code ?
-                    </p>
+                    </h2>
                     <aside class="notes">
                         Now, keep your hand up if you write tests for your code.
                     </aside>
                 </section>
 
                 <section>
-                    <p>
+                    <h2>
                         Do you test your tests ?
-                    </p>
+                    </h2>
                     <img src="./img/yo_dawg_test.jpg">
                     <aside class="notes">
                         And do you test your tests ?
@@ -84,9 +85,9 @@
                 </section>
 
                 <section>
-                    <p>
+                    <h2>
                         Do you test the tests for your tests ?
-                    </p>
+                    </h2>
                     <img src="./img/yo_dawg_surprised.jpg">
                     <aside class="notes">
                         And do you test the tests that you wrote for your tests ?<br/>
@@ -96,7 +97,7 @@
                 </section>
 
                 <section>
-                    <img src="./img/nobody_has_time.jpg" />
+                    <img src="./img/much_typing.png" />
                     <aside class="notes">
                         "Testing your tests" might sound crazy.<br/>
                         After all, we just saw that not everybody has time to test their code in the first place.<br/>
@@ -118,68 +119,54 @@
                 </section>
 
                 <section>
-                    <p>
-                        How does it work ?
-                    </p>
-                    <aside class="notes">
-                        Ok, so how does it work ?
-                    </aside>
-                </section>
-
-                <section>
+                    <section>
+                        <h2>How does it work ?</h2>
+                        <aside class="notes">Ok, so how does it work ?</aside>
+                    </section>
                     <section>
                         <p>Step 1. Change you code in a small way:
-    <pre><code class="python">a + b</code></pre>
-        <span style="font-size: 72px;">&#8595;</span>
-    <pre><code class="python">a * b</code></pre>
+                        <ul>
+                            <li>a <span class="bad">+</span> b ---> a <span class="good">*</span> b</li>
+                            <li>a + <span class="bad">1</span> ---> a + <span class="good">2</span></li>
+                            <li>a + <span class="bad">b</span> ---> a + <span class="good">c</span></li>
+                            <li><span class="bad">a + 1</span> ---> <span class="good">a + 1<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a + 1</span></li>
+                            <li>(if a == 1 <span class="bad">and</span> b > 1) ---> (if a == 1 <span class="good">or</span> b > 1)</li>
+                        </ul>
                         </p>
                         <aside class="notes">
                             You start by changing your code in a small way.<br/>
                             How small changes are we talking about ?<br>
                             Well, very small, you can:<br/>
                             change the operator or a value in a mathematical equation
-                            duplicate a statement
                             replace one variable with other
+                            duplicate a statement
+                            change the boolean operators
                             etc.
+                            So the changes should be similar to small programming errors that each of us do.
                         </aside>
                     </section>
                     <section>
-                        <p>Step 1. Change you code in a small way:
-    <pre><code class="python">def add(a, b):
-        return a + b</code></pre>
-        <span style="font-size: 72px;">&#8595;</span>
-    <pre><code class="python">def add(a, b):
-        return a + b
-        return a + b</code></pre>
+                        <p>
+                            Step 2. Run you tests and see what happens
+                            <img src="./img/mutation_schema_big.png">
                         </p>
                         <aside class="notes">
-                            You start by changing your code in a small way.<br/>
-                            How small changes are we talking about ?<br>
-                            Well, very small, you can:<br/>
-                            change the operator or a value in a mathematical equation
-                            duplicate a statement
-                            replace one variable with other
-                            etc.
+                            After that, you run your tests and see what happens. There are two possibilities here.<br/>
+                            You start getting errors, which means that tests have reached the modified code and:<br/>
+                            - either they died with some error message, because they didn't expect this modification in the code - this means that your tests are good and in case something changes, you will notice it (this is called weak mutation testing)<br/>
+                            - or the tests detected the change properly and gave you the assertion error - which means that your tests are even better (this is called strong mutation testing and it's more powerful - it means that tests are actually catching the possible problems, but it's more difficult to achieve).
                         </aside>
                     </section>
                 </section>
 
+
+
+
+
                 <section>
-                    <p>Step 1. Change you code in a small way:
-<pre><code class="python">def add(a, b):
-    return a + b</code></pre>
-    <span style="font-size: 72px;">&#8595;</span>
-<pre><code class="python">def add(a, b):
-    return a * b</code></pre>
+                    <p>
                     </p>
                     <aside class="notes">
-                        You start by changing your code in a small way.<br/>
-                        How small changes are we talking about ?<br>
-                        Well, very small, you can:<br/>
-                        change the operator or a value in a mathematical equation
-                        duplicate a statement
-                        replace one variable with other
-                        etc.
                     </aside>
                 </section>
 
@@ -198,10 +185,8 @@
 
                 <section>
                     <p>
-                        Do you write tests ?
                     </p>
                     <aside class="notes">
-                        Now, keep your hand up if you write tests for your code.
                     </aside>
                 </section>
 
@@ -210,15 +195,30 @@
 
                 <section>
                     <p>
-                        Do you write tests ?
                     </p>
-                    <aside>
-                        Now, keep your hand up if you write tests for your code.
+                    <aside class="notes">
                     </aside>
                 </section>
 
 
 
+
+                <section>
+                    <p>
+                    </p>
+                    <aside class="notes">
+                    </aside>
+                </section>
+
+
+
+
+                <section>
+                    <p>
+                    </p>
+                    <aside class="notes">
+                    </aside>
+                </section>
 
 
 
