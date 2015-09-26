@@ -62,7 +62,7 @@
                     <aside class="notes">
                         Let me just ask you a few questions before we start.<br/>
                         Please raise your hands if you are writing code.<br/>
-                        Cool, everyone. Well, I didn't expect anything else since the forum is called "Developers@CERN"
+                        Cool, everyone. Well, I didn't expect anything less since the forum is called "Developers@CERN"
                     </aside>
                 </section>
 
@@ -122,7 +122,7 @@
                 <section>
                     <section>
                         <h1>How does this mutation testing works ?</h1>
-                        <aside class="notes">Ok, so how does it work ?</aside>
+                        <aside class="notes">Ok, so how does this mutation testing works ?</aside>
                     </section>
                     <section>
                         <h2>Step 1. Change you code in a small way:</h2>
@@ -146,7 +146,7 @@
                             replace one variable with another,<br/>
                             duplicate a statement,<br/>
                             change the boolean operators,<br/>
-                            etc.
+                            etc., etc.<br/>
                             So the changes should be similar to small programming errors that each of us do.
                         </aside>
                     </section>
@@ -168,7 +168,7 @@
                             <img src="./img/mutation_schema_passed.jpg">
                         </p>
                         <aside class="notes">
-                            But what happens if after the the mutation, your tests are still working ?<br/>
+                            But what happens if after the mutation, your tests are still working ?<br/>
                             Well, it usually means bad things:<br/>
                             - either you tests didn't detect the problems that were introduced during the mutation (so your tests are bad),<br/>
                             - or the code that was changed was never executed (so you have dead code, which is even worse than bad tests)
@@ -279,7 +279,7 @@ while True:
                         <aside class="notes">
                             Let me show you an example. Take a look at this simple loop that does some stuff and then increments the index.<br />
                             When we reach 10, we want to break.<br />
-                            Now, the mutation tests can replace the equal operator with great or equal.<br/>
+                            Now, the mutation tests can replace the equal operator with greater or equal.<br/>
                             We can easily tell that even though the syntax is different, both versions of this loop will have exactly the same behavior.<br />
                             However, automatic tools are not as clever as we are. They will see a different syntax that has not been detected by any of the tests and give us a false positive.
                         </aside>
@@ -308,8 +308,8 @@ while True:
                         They can help you detect problem with your tests<br/>
                         But they can also help you detect problems with your code, like dead code<br/>
                         They are automatic.<br/>
-                        And let's face it - how else would you asses the quality of your tests ?<br/>
-                        We have code coverage statistics for the code, but we don't have anything for tests.<br/>
+                        And let's face it - how else would you measure the quality of your tests ?<br/>
+                        We have code coverage statistics for the code, but we don't have anything like that for tests.<br/>
                         So, if there is a good tool, that I could plug into my continuous integration cycle that would report problems with my test, then I'm totally sold.<br/>
                         Studies shows that software developers spend up to 50% of their time just on testing. I would love to have a tool that gives me automatic feedback on my tests.<br/>
                     </aside>
@@ -325,9 +325,9 @@ while True:
                     </ul>
                     <aside class="notes">
                         And that bring us to the "not so good parts".<br/>
-                        First of all - mutation testing is slow. If you think that your whole test suite is slow because it runs for 2 minutes, then imagine that proper mutation testing requires running all tests for the all mutants. Well, there are some studies on how to speed up this process, like using selective mutations or mutant sampling, but they all boil down to running less tests and that might overlook some bugs.<br/>
+                        First of all - mutation testing is slow. If you think that your whole test suite is slow because it runs for 2 minutes, then imagine that proper mutation testing requires running all your tests for the all the mutants. Well, there are some studies on how to speed up this process, like using selective mutations or mutant sampling, but they all boil down to running less tests and that might overlook some bugs.<br/>
                         There are not so many good libraries for mutation testing.<br/>
-                        This is often caused by the aforementioned Equivalent Mutant Problem, which is very difficult to solve<br/>
+                        This is often caused by the aforementioned Equivalent Mutant Problem, which is very difficult to solve.<br/>
                         Also, writing complex tests, beyond the simple operator changing or variables replacement, it's basically impossible.
                     </aside>
                 </section>
@@ -344,9 +344,9 @@ while True:
                         <li><a href="http://ortask.com/mutator/">Mutator</a> - commercial solution for Java, Ruby, JavaScript and PHP</li>
                     </ul>
                     <aside class="notes">
-                        As I said, there aren't many libraries that are still maintained.<br/>
+                        As I said, there aren't that many libraries.<br/>
                         I'm showing this list in case you want take a look if there is a tool for your favorite language.<br/>
-                        It might be missing some libraries, so I encourage you to search on your own if you are interested in the subject.<br/>
+                        I might be missing some libraries, so I encourage you to search on your own if you are interested in the subject.<br/>
                     </aside>
                 </section>
 
@@ -374,14 +374,16 @@ class CalculatorTest(TestCase):
     def test_multiply(self):
         self.assertEqual(multiply(2, 2), 4)</code></pre>
                         <aside class="notes">
+                            This is how the code looks like. Just one function inside calculator.py and one test inside test_calculator.py file.
+                            Let's run MutPy on those two files.
                         </aside>
                     </section>
                     <section>
                     <img src="./img/mutpy.png">
                         <aside class="notes">
-                        MutPy has created a 3 mutants, each of them with different arithmetical operator.<br/>
-                        You can see them marked with the red arrow<br/>
-                        For the first two, the mutants were killed, but for the last one - the power operator - mutant has survived<br/>
+                        As you can see, MutPy has created 3 mutants, each of them with a different arithmetical operator.<br/>
+                        Each mutant is marked with the red arrow<br/>
+                        The first two mutants were killed, but the last one - the power operator mutant - has survived<br/>
                         </aside>
                     </section>
                     <section>
@@ -397,7 +399,7 @@ class CalculatorTest(TestCase):
                     <section>
                         <img src="./img/mutpy_fixed.png">
                         <aside class="notes">
-                            Great, all the mutants are dead and our score is 100%.<br/>
+                            Great, now all the mutants are dead and our mutation score is 100%.<br/>
                             We have awesome tests and we can start adding new functionality to our calculator.
                         </aside>
                     </section>
@@ -408,6 +410,7 @@ class CalculatorTest(TestCase):
                     <h2>Any questions ?</h2>
                     <p>Happy coding !</p>
                     <aside class="notes">
+                        I hope you guys enjoyed the talk and let me know if you have any questions.
                     </aside>
                 </section>
 
