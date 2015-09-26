@@ -48,7 +48,8 @@
                         <small>Created by <a href="https://github.com/switowski">Sebastian Witowski</a></small>
                     </p>
                     <aside class="notes">
-                        Hey guys, I hope you had a great time today, there were so many cool talks and I guess you are all hungry and would like to go for lunch, so I promise I won't keep you long here.
+                        Hey guys, I hope you had a great time today.<br/>
+                        There were so many cool talks and it's almost time for lunch, so I promise I won't keep you too long.
                     </aside>
                 </section>
 
@@ -59,8 +60,8 @@
                         Do you write code ?
                     </h2>
                     <aside class="notes">
-                        Let's start with a few questions for a warm up.
-                        Please raise your hand if you are writing code.
+                        Let me just ask you a few questions before we start.<br/>
+                        Please raise your hands if you are writing code.<br/>
                         Cool, everyone. Well, I didn't expect anything else since the forum is called "Developers@CERN"
                     </aside>
                 </section>
@@ -70,7 +71,7 @@
                         Do you test your code ?
                     </h2>
                     <aside class="notes">
-                        Now, keep your hand up if you write tests for your code.
+                        Now, keep your hands up if you write tests for your code.
                     </aside>
                 </section>
 
@@ -80,7 +81,8 @@
                     </h2>
                     <img src="./img/yo_dawg_test.jpg">
                     <aside class="notes">
-                        And do you test your tests ?
+                        Great, but let's take it one step further.<br/>
+                        Keep your hands up if you test your tests ?
                     </aside>
                 </section>
 
@@ -90,13 +92,14 @@
                     </h2>
                     <img src="./img/yo_dawg_surprised.jpg">
                     <aside class="notes">
-                        And do you test the tests that you wrote for your tests ?<br/>
+                        And the last one, keep you hand up if you test the tests that you wrote for your tests ?<br/>
                         No, I'm just kidding.<br/>
                         Let's just stick to testing your tests here.
                     </aside>
                 </section>
 
                 <section>
+                    <h2>Testing tests ?</h2>
                     <img src="./img/much_typing.png" />
                     <aside class="notes">
                         "Testing your tests" might sound crazy.<br/>
@@ -104,10 +107,8 @@
                     </aside>
                 </section>
 
-
-
                 <section>
-                    <img src="./img/r_lipton.jpg" />
+                    <!-- <img src="./img/r_lipton.jpg" /> -->
                     <p>
                         Richard Lipton, <em>Fault Diagnosis of Computer Programs</em>, 1971
                     </p>
@@ -120,7 +121,7 @@
 
                 <section>
                     <section>
-                        <h1>How does it work ?</h1>
+                        <h1>How does this mutation testing works ?</h1>
                         <aside class="notes">Ok, so how does it work ?</aside>
                     </section>
                     <section>
@@ -134,14 +135,17 @@
                                 <li>(if a == 1 <span class="bad">and</span> b > 1) ---> (if a == 1 <span class="good">or</span> b > 1)</li>
                             </ul>
                         </p>
+                        <p>
+                            Changes similar to small, programming errors.
+                        </p>
                         <aside class="notes">
                             You start by changing your code in a small way.<br/>
-                            How small changes are we talking about ?<br>
-                            Well, very small, you can:<br/>
-                            change the operator or a value in a mathematical equation
-                            replace one variable with other
-                            duplicate a statement
-                            change the boolean operators
+                            How small ?<br>
+                            Well, very small, for example you can:<br/>
+                            change the operator or a value in a mathematical equation,<br/>
+                            replace one variable with another,<br/>
+                            duplicate a statement,<br/>
+                            change the boolean operators,<br/>
                             etc.
                             So the changes should be similar to small programming errors that each of us do.
                         </aside>
@@ -154,22 +158,37 @@
                         <aside class="notes">
                             After that, you run your tests and see what happens. There are two possibilities here.<br/>
                             You start getting errors, which means that tests have reached the modified code and:<br/>
-                            - either they died with some error message, because they didn't expect this modification in the code - this means that your tests are good and in case something changes, you will notice it (this is called weak mutation testing)<br/>
-                            - or the tests detected the change properly and gave you the assertion error - which means that your tests are even better (this is called strong mutation testing and it's more powerful - it means that tests are actually catching the possible problems, but it's more difficult to achieve this).
-                            Or, your tests are still working which is bad because it can mean one of two things:<br/>
-                            - the code that was changed was never executed (so you have dead code, which is even worse than bad tests)
-                            - your tests can't detect the problems that were introduced during the mutation (so your tests are bad)
+                            - either they died with some error message, because they didn't expect this modification in the code. For example your function was expecting 2 parameters but suddenly it got only one and that kills your test. This situation is called "weak mutation testing" and it means that your tests are good and in case something changes, you will notice it.<br/>
+                            - or your tests detects the change properly and informs you about it with the assertion failure - which means that your tests are even better. This situation is called strong mutation testing and it's more powerful - it means that tests are actually catching the possible problems, but it's also more difficult to achieve this.
+                        </aside>
+                    </section>
+                    <section>
+                        <h2>Step 2. Run your tests</h2>
+                        <p>
+                            <img src="./img/mutation_schema_passed.jpg">
+                        </p>
+                        <aside class="notes">
+                            But what happens if after the the mutation, your tests are still working ?<br/>
+                            Well, it usually means bad things:<br/>
+                            - either you tests didn't detect the problems that were introduced during the mutation (so your tests are bad),<br/>
+                            - or the code that was changed was never executed (so you have dead code, which is even worse than bad tests)
                         </aside>
                     </section>
                     <section>
                         <h2>Step 3. Get the mutation score</h2>
-                        <p>
-                            <span>Mutation score = </span>
-                            <span class="good" style="border-bottom: solid #fff; padding: 4px 10px;">number or mutants killed</span><br />
-                            <span class="bad" style="padding: 4px 10px 0 280px;">number of mutants created</span>
-                        </p>
+                        <div style="clear: both;">
+                            <div style="float: left; width: 40%;">
+                                <div style="float: right; line-height: 100px;">Mutation score = </div>
+                            </div>
+                            <div style="float: right; width: 60%;">
+                                <div style="float: left; padding-left: 5px;">
+                                    <span class="good" style="border-bottom: solid #fff; padding: 4px;">number or mutants killed</span><br />
+                                    <span class="bad" style="padding-top: 4px;">number of mutants created</span>
+                                </div>
+                            </div>
+                        </div>
                         <aside class="notes">
-                            After all the possible mutations have been tested, you will get the mutation score, which is equal the number of mutants killed divided by the total number of mutants created.<br />
+                            After all the possible mutations have been tested, you will get the mutation score, which is equal to the number of mutants killed divided by the total number of mutants created.<br />
                             So here, instead of having 100% of test coverage (as for normal tests), we aim to have 100% of mutants killed.
                         </aside>
                     </section>
@@ -177,7 +196,8 @@
                     <section>
                         <h2>Step 4. Profit</h2>
                         <aside class="notes">
-                            And that's it, it's that simple ! Now you know what tests you need to fix.
+                            And that's it, it's that simple !<br/>
+                            Now you know what tests you need to fix.
                         </aside>
                     </section>
                 </section>
@@ -186,7 +206,7 @@
                     <section>
                         <h1>Example time</h1>
                         <aside class="notes">
-                            And that's it, it's that simple ! Now you know what tests you need to fix.
+                            Let see an example of how it works.
                         </aside>
                     </section>
                     <section>
@@ -195,10 +215,14 @@
     return a * b</code></pre>
                         </p>
                         <aside class="notes">
-                        Let's write a simple function that could be used in a calculator software.
+                        Let's write a function that could be used in a simple calculator program.
                         </aside>
                     </section>
                     <section>
+                        <p>
+                            <pre><code>def multiply(a, b):
+    return a * b</code></pre>
+                        </p>
                         <p>
                             <pre><code>class CalculatorTest(TestCase):
     def test_multiply(self):
@@ -219,7 +243,7 @@
                         </p>
                         <aside class="notes">
                             So now we know that we need to improve our test.<br />
-                            And this is how mutation testing can help you improve your tests.
+                            And this is how mutations can help you writing better tests.
                         </aside>
                     </section>
                 </section>
@@ -234,7 +258,7 @@
 
                 <section>
                     <section>
-                        <h2>Equal Mutant Problem</h2>
+                        <h2>Equivalent Mutant Problem</h2>
                         <aside class="notes">
                             One of the main problems with mutation testing is called "Equivalent Mutant Problem" - it means that some operations can create a mutant that you won't be able to detect with any tests.
                         </aside>
@@ -255,8 +279,9 @@ while True:
                         <aside class="notes">
                             Let me show you an example. Take a look at this simple loop that does some stuff and then increments the index.<br />
                             When we reach 10, we want to break.<br />
-                            We can easily tell that in this case there is absolutely no difference if we use the equal operator or the greater or equal operator.<br />
-                            However, for automatic mutation testing, those two cases are different and we will get a false positive (mutation testing thinks that changing the comparison operator creates a mutant that has not been killed, so it assumes your tests are not strong enough).
+                            Now, the mutation tests can replace the equal operator with great or equal.<br/>
+                            We can easily tell that even though the syntax is different, both versions of this loop will have exactly the same behavior.<br />
+                            However, automatic tools are not as clever as we are. They will see a different syntax that has not been detected by any of the tests and give us a false positive.
                         </aside>
                     </section>
                 </section>
@@ -274,73 +299,117 @@ while True:
                     <ul>
                         <li>Detect problems with your tests</li>
                         <li>They discover dead code</li>
-                        <li>They are (usually) automated</li>
+                        <li>They are automatic</li>
                         <li>How else would you test your tests ?</li>
+                        <li>(Semi-)Automatic tool for testing ? I'm in !</li>
                     </ul>
                     <aside class="notes">
+                        What could be the advantages of automatic mutation testing tools ?<br/>
+                        They can help you detect problem with your tests<br/>
+                        But they can also help you detect problems with your code, like dead code<br/>
+                        They are automatic.<br/>
+                        And let's face it - how else would you asses the quality of your tests ?<br/>
+                        We have code coverage statistics for the code, but we don't have anything for tests.<br/>
+                        So, if there is a good tool, that I could plug into my continuous integration cycle that would report problems with my test, then I'm totally sold.<br/>
+                        Studies shows that software developers spend up to 50% of their time just on testing. I would love to have a tool that gives me automatic feedback on my tests.<br/>
                     </aside>
                 </section>
 
                 <section>
                     <h2>The not so good parts</h2>
                     <ul>
-                        <li>Mutation testing is slow</li>
-                        <li>Not so many libraries</li>
+                        <li>Mutation testing is slow:<br/>(TIME = ALL MUTANTS x ALL TESTS)</li>
+                        <li>Handful of libraries</li>
                         <li>Equivalent Mutant Problem</li>
                         <li>Writing complex mutant tests is difficult</li>
                     </ul>
                     <aside class="notes">
+                        And that bring us to the "not so good parts".<br/>
+                        First of all - mutation testing is slow. If you think that your whole test suite is slow because it runs for 2 minutes, then imagine that proper mutation testing requires running all tests for the all mutants. Well, there are some studies on how to speed up this process, like using selective mutations or mutant sampling, but they all boil down to running less tests and that might overlook some bugs.<br/>
+                        There are not so many good libraries for mutation testing.<br/>
+                        This is often caused by the aforementioned Equivalent Mutant Problem, which is very difficult to solve<br/>
+                        Also, writing complex tests, beyond the simple operator changing or variables replacement, it's basically impossible.
                     </aside>
                 </section>
 
                 <section>
-                    <h1>Mutant testing libraries</h1>
+                    <h2>Mutant testing libraries</h2>
+                    <ul>
+                        <li><a href="https://github.com/mbj/mutant">Mutant</a> - Ruby (last updated September 2015)</li>
+                        <li><a href="https://github.com/visualmutator/visualmutator">VisualMutator</a> - C# (last updated September 2015)</li>
+                        <li><a href="https://github.com/hcoles/pitest">Pitest</a> - Java (last updated August 2015)</li>
+                        <li><a href="https://github.com/padraic/humbug">Humbug</a> - PHP (last updated May 2015)</li>
+                        <li><a href="https://bitbucket.org/osu-testing/mucheck">MuCheck</a> - Haskell (last updated January 2015)</li>
+                        <li><a href="https://pypi.python.org/pypi/MutPy/0.4.0">MutPy</a> - Python3 (last updated January 2014)</li>
+                        <li><a href="http://ortask.com/mutator/">Mutator</a> - commercial solution for Java, Ruby, JavaScript and PHP</li>
+                    </ul>
                     <aside class="notes">
+                        As I said, there aren't many libraries that are still maintained.<br/>
+                        I'm showing this list in case you want take a look if there is a tool for your favorite language.<br/>
+                        It might be missing some libraries, so I encourage you to search on your own if you are interested in the subject.<br/>
                     </aside>
+                </section>
+
+                <section>
+                    <section>
+                        <h2>Example</h2>
+                        <p>MutPy (requires Python3)</p>
+                        <aside class="notes">
+                            Before I finish my presentation, I would like to show you a real life mutation testing tool run on the calculator program that I showed you before.<br/>
+                            I will use the MutPy library that unfortunately works only with Python3.
+                        </aside>
+                    </section>
+                    <section>
+                        <p>
+                            calculator.py
+                            <pre><code>def multiply(a, b):
+    return a * b</code></pre>
+                        </p>
+                        <p>
+                            test_calculator.py
+                            <pre><code>from unittest import TestCase
+from calculator import multiply
+
+class CalculatorTest(TestCase):
+    def test_multiply(self):
+        self.assertEqual(multiply(2, 2), 4)</code></pre>
+                        <aside class="notes">
+                        </aside>
+                    </section>
+                    <section>
+                    <img src="./img/mutpy.png">
+                        <aside class="notes">
+                        MutPy has created a 3 mutants, each of them with different arithmetical operator.<br/>
+                        You can see them marked with the red arrow<br/>
+                        For the first two, the mutants were killed, but for the last one - the power operator - mutant has survived<br/>
+                        </aside>
+                    </section>
+                    <section>
+                        <p>
+                            <pre><code>self.assertEqual(multiply(2, 2), 4)</code></pre>
+                            <span style="font-size: 72px;">&darr;</span>
+                            <pre><code>self.assertEqual(multiply(3, 3), 9)</code></pre>
+                        </p>
+                        <aside class="notes">
+                            Let's fix our test and run the MutPy again
+                        </aside>
+                    </section>
+                    <section>
+                        <img src="./img/mutpy_fixed.png">
+                        <aside class="notes">
+                            Great, all the mutants are dead and our score is 100%.<br/>
+                            We have awesome tests and we can start adding new functionality to our calculator.
+                        </aside>
+                    </section>
                 </section>
 
                 <section>
                     <h2>Thank you !</h2>
-                    <h1>You guys are the best audience ever !</h1>
                     <h2>Any questions ?</h2>
+                    <p>Happy coding !</p>
                     <aside class="notes">
                     </aside>
                 </section>
-
-
-
-
-
-                <section>
-                    <p>
-                    </p>
-                    <aside class="notes">
-                    </aside>
-                </section>
-
-
-
-
-
-                <section>
-                    <p>
-                    </p>
-                    <aside class="notes">
-                    </aside>
-                </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             </div>
         </div>
