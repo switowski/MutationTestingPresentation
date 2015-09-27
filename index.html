@@ -49,7 +49,7 @@
                     </p>
                     <aside class="notes">
                         Hey guys, I hope you had a great time today.<br/>
-                        There were so many cool talks and it's almost time for lunch, so I promise I won't keep you too long.
+                        There were many cool talks and since it's almost time for lunch, I promise I won't keep you too long.
                     </aside>
                 </section>
 
@@ -121,7 +121,7 @@
 
                 <section>
                     <section>
-                        <h1>How does this mutation testing works ?</h1>
+                        <h2>How does this mutation testing works ?</h2>
                         <aside class="notes">Ok, so how does this mutation testing works ?</aside>
                     </section>
                     <section>
@@ -374,7 +374,7 @@ class CalculatorTest(TestCase):
     def test_multiply(self):
         self.assertEqual(multiply(2, 2), 4)</code></pre>
                         <aside class="notes">
-                            This is how the code looks like. Just one function inside calculator.py and one test inside test_calculator.py file.
+                            This is how the code looks like. Just one function inside calculator.py and one test inside test_calculator.py file.<br/>
                             Let's run MutPy on those two files.
                         </aside>
                     </section>
@@ -408,7 +408,8 @@ class CalculatorTest(TestCase):
                 <section>
                     <h2>The future ?</h2>
                     <aside class="notes">
-                        Right now, there are no perfect tools for mutation testing.<br/>
+                        So what's the state of mutation testing tools ?<br/>
+                        Right now, there are no perfect tools for that.<br/>
                         One of the main problems is the high computational cost, but I think that thanks to the tools like docker that gives you cheap and scalable containers where you can run your tests in parallel, in the future someone will come up with a good solution and the mutation testing will be a standard feature of continuous integration tools like Travis of Jenkins.
                     </aside>
                 </section>
