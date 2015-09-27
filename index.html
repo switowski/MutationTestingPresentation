@@ -45,7 +45,8 @@
                         1st Developers@CERN Forum
                     </p>
                     <p>
-                        <small>Created by <a href="https://github.com/switowski">Sebastian Witowski</a></small>
+                        <small>Created by <a href="https://github.com/switowski">Sebastian Witowski</a></small><br/>
+                        <small>See this presentations at <a href="http://switowski.github.io/MutationTestingPresentation/">github pages</a></small>
                     </p>
                     <aside class="notes">
                     </aside>
@@ -59,7 +60,7 @@
                     </h2>
                     <aside class="notes">
                         Let me just ask you a few questions before we start.<br/>
-                        Please raise your hands if you are writing code.<br/>
+                        Please raise your hands if you write code.<br/>
                         Cool, everyone. Well, I didn't expect anything less since the forum is called "Developers@CERN"
                     </aside>
                 </section>
@@ -304,11 +305,12 @@ while True:
                     <aside class="notes">
                         What could be the advantages of automatic mutation testing tools ?<br/>
                         They can help you detect problem with your tests<br/>
-                        But they can also help you detect problems with your code, like dead code<br/>
-                        They are automatic.<br/>
+                        But they can also help you detect problems with your code, like a dead code<br/>
+                        They are automatic. You won't write the mutation tests by hand because it would take too much time.<br/>
+                        You will either use an existing library or at least you will write your own library.<br/>
                         And let's face it - how else would you measure the quality of your tests ?<br/>
-                        We have code coverage statistics for the code, but we don't have anything like that for tests.<br/>
-                        So, if there is a good tool, that I could plug into my continuous integration cycle that would report problems with my test, then I'm totally sold.<br/>
+                        We have test coverage statistics for the code, but we don't have anything like that for tests.<br/>
+                        So, if there was a good tool, that I could plug into my continuous integration cycle that would report problems with my test, then I'm totally sold.<br/>
                         Studies shows that software developers spend up to 50% of their time just on testing. I would love to have a tool that gives me automatic feedback on my tests.<br/>
                     </aside>
                 </section>
@@ -379,9 +381,9 @@ class CalculatorTest(TestCase):
                     <section>
                     <img src="./img/mutpy.png">
                         <aside class="notes">
-                        As you can see, MutPy has created 3 mutants, each of them with a different arithmetical operator.<br/>
-                        Each mutant is marked with the red arrow<br/>
+                        As you can see, pointed by those big red arrows, MutPy has created 3 mutants, each of them with a different arithmetical operator.<br/>
                         The first two mutants were killed, but the last one - the power operator mutant - has survived<br/>
+                        Our mutation score is 66%.
                         </aside>
                     </section>
                     <section>
