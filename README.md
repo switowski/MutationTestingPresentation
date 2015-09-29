@@ -4,9 +4,9 @@ Presentation created for 1st Developers@CERN Forum (CERN, 28th September 2015)
 
 To view the slides in the browser, go [here](http://switowski.github.io/MutationTestingPresentation/)
 
-PDF version of the slides is in *Slides_in_PDF.pdf* file
+To see the video from the presentation, go [here](http://cds.cern.ch/record/2055614)
 
-Video of the presentation will be available later
+PDF version of the slides is in *Slides_in_PDF.pdf* file
 
 ## Important
 
